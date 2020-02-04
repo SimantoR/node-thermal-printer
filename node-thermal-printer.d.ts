@@ -11,6 +11,19 @@ declare enum PrinterTypes {
   STAR = "star"
 }
 
+interface ConfigProps {
+  type?: PrinterTypes;
+  interface: string;
+  width?: number;
+  characterSet?: string;
+  lineCharacter?: string;
+  driver?: Object;
+  removeSpecialCharacters?: boolean;
+  options?: {
+    timeout?: number
+  };
+}
+
 declare class ThermalPrinter {
   printerTypes: PrinterTypes;
 
@@ -18,18 +31,7 @@ declare class ThermalPrinter {
    * Constructor
    * @param Object config (type, interface, width, characterSet, removeSpecialCharacters, options)
   */
-  constructor(config: {
-    type?: PrinterTypes;
-    interface: string;
-    width?: number;
-    characterSet?: string;
-    lineCharacter?: string;
-    driver?: Object;
-    removeSpecialCharacters?: boolean;
-    options?: {
-      timeout?: number
-    };
-  });
+  constructor(config: ConfigProps);
 
   /**
    * Send printing buffer to printer
@@ -342,5 +344,6 @@ declare class ThermalPrinter {
 
 export {
   ThermalPrinter as printer,
-  PrinterTypes as types
+  PrinterTypes as types,
+  ConfigProps
 };
